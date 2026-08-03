@@ -1,0 +1,11 @@
+.idea/
+*.iml
+target/
+build/
+out/
+
+.env
+
+logs/
+
+*.log

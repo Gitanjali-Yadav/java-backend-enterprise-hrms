@@ -1,0 +1,1742 @@
+🏢 Enterprise HRMS
+Sprint 0 – Project Foundation & Architecture
+
+Sprint Goal: Establish the engineering foundation before writing business logic.
+
+Estimated Duration: 2–3 days
+
+🎯 Sprint Objective
+
+By the end of Sprint 0, we should have:
+
+Professional project setup
+Development environment ready
+Git workflow established
+Architecture decisions finalized
+Spring Boot project created
+Database connected
+Swagger working
+First successful application run
+Initial commit pushed to GitHub
+
+No Employee CRUD.
+No Authentication.
+No Business Logic.
+
+Just a solid foundation.
+
+📋 Sprint Backlog
+Task 1 — Project Setup ✅
+Deliverables
+ Create GitHub Repository
+ Create Local Project Structure
+ Create README
+ Add .gitignore
+ Create develop branch
+ Create feature/project-foundation branch
+Task 2 — Development Environment Verification
+
+Verify:
+
+ Java 25 LTS
+ IntelliJ IDEA
+ Gradle
+ Git
+ Docker Desktop
+ MySQL Server
+ MySQL Workbench
+ Postman
+Learn
+JAVA_HOME
+Gradle Wrapper
+Environment Variables
+Task 3 — Technology Decisions
+
+Finalize project standards.
+
+Decisions
+Technology	Decision
+Java	Java 25 LTS
+Spring Boot	Spring Boot 4.x
+Build Tool	Gradle (Groovy DSL)
+Database	MySQL 8
+ORM	Spring Data JPA + Hibernate
+Migration	Flyway
+Security	Spring Security
+Documentation	Swagger / OpenAPI
+Testing	JUnit 5 + Mockito
+Containerization	Docker
+
+Deliverable
+docs/sprint-0/architecture-decisions.md
+
+Task 4 — Architecture Design
+
+Design the initial architecture.
+
+Learn
+Layered Architecture
+Modular Monolith
+MVC
+Dependency Injection
+IoC
+Bean Lifecycle
+REST
+
+Deliverable
+Architecture Diagram
+
+Client
+
+↓
+
+REST API
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+MySQL
+Task 5 — Package Structure
+
+We'll use feature-first packaging.
+
+com.gitanjali.hrms
+│
+├── common
+│
+├── config
+│
+├── security
+│
+├── employee
+│
+├── department
+│
+├── attendance
+│
+├── leave
+│
+├── payroll
+│
+├── notification
+│
+├── audit
+│
+└── EnterpriseHrmsApplication
+Learn
+Why feature-based packaging?
+Why not package-by-layer?
+Scalability considerations
+Task 6 — Database Standards
+
+Define naming conventions.
+
+Tables
+employees
+departments
+attendance_records
+leave_requests
+payrolls
+roles
+users
+Columns
+employee_id
+first_name
+created_at
+updated_at
+Learn
+Naming conventions
+Primary keys
+Foreign keys
+Audit columns
+Task 7 — API Standards
+
+Define REST conventions.
+
+Base URL
+/api/v1
+
+Example
+
+POST /api/v1/employees
+
+GET /api/v1/employees
+
+PUT /api/v1/employees/{id}
+
+DELETE /api/v1/employees/{id}
+Learn
+REST
+HTTP Methods
+Status Codes
+API Versioning
+Task 8 — Generate Spring Boot Project
+
+Using Spring Initializr.
+
+Project
+Project
+Gradle
+Language
+Java
+Spring Boot
+4.x
+Java
+25
+Packaging
+Jar
+Group
+com.gitanjali
+Artifact
+enterprise-hrms
+Name
+Enterprise HRMS
+Task 9 — Add Initial Dependencies
+
+Only add what we need today.
+
+Dependencies
+Spring Web
+Spring Data JPA
+MySQL Driver
+Lombok
+Validation
+Spring Security
+Flyway Migration
+Spring Boot DevTools
+Spring Boot Actuator
+OpenAPI (Swagger)
+Learn
+
+What each dependency does.
+
+Why we need it.
+
+When NOT to use it.
+
+Task 10 — Import into IntelliJ
+Verify
+Gradle Sync
+Project Structure
+JDK
+Build Success
+Task 11 — Configure Application
+
+Create
+
+application.yml
+
+Configure
+
+Server Port
+Database
+Logging
+JPA
+Flyway
+Learn
+Externalized Configuration
+Profiles
+Configuration Properties
+Task 12 — Create Database
+
+Create
+
+enterprise_hrms
+
+Verify
+
+Connection from IntelliJ.
+
+Task 13 — Run the Application
+
+Verify
+
+Application starts successfully.
+Embedded server runs.
+Database connection succeeds.
+Flyway executes.
+Swagger UI loads.
+Task 14 — Documentation
+
+Create
+
+docs/
+
+Sprint-0/
+
+Architecture-Decisions.md
+
+Environment-Setup.md
+
+Tech-Stack.md
+Task 15 — Git
+
+Commit
+
+feat: initialize Enterprise HRMS project foundation
+
+Push
+
+feature/project-foundation
+
+
+📚 Concepts You'll Learn in Sprint 0
+SDLC
+Project Initialization
+Monolith Architecture
+Modular Monolith
+Spring Boot Project Structure
+Gradle
+Dependency Management
+Configuration
+REST Basics
+Dependency Injection
+IoC
+Spring Beans
+Feature-based Packaging
+Database Standards
+Flyway
+Swagger
+Git Workflow
+📄 Documentation Deliverables
+
+By the end of Sprint 0, your repository should contain:
+
+Enterprise-HRMS
+│
+├── backend/
+├── database/
+├── diagrams/
+├── docker/
+├── docs/
+│   └── sprint-0/
+│       ├── architecture-decisions.md
+│       ├── environment-setup.md
+│       ├── tech-stack.md
+│       └── sprint-review.md
+├── postman/
+├── scripts/
+└── README.md
+🎯 Sprint 0 Definition of Done
+
+
+Perfect. This is exactly how backend engineers work in industry. Sprint 0 is not about "building features"; it's about building a project that **can survive for years**.
+
+Since you've already completed:
+
+* ✅ Git repository
+* ✅ Branch strategy
+* ✅ Project structure
+* ✅ Spring Boot project creation
+
+Today we'll start with the **first actual engineering lesson** instead of rushing into configuration.
+
+---
+
+# Sprint 0 - Day 1
+
+# Lesson 1 — Why Sprint 0 Exists
+
+Imagine your company hires **200 developers**.
+
+Everyone starts coding immediately.
+
+One developer stores configuration inside Java files.
+
+Another uses YAML.
+
+Another names packages `controller`, `service`.
+
+Another uses feature-based packages.
+
+One uses PostgreSQL.
+
+One uses MySQL.
+
+One exposes
+
+```
+/employees
+```
+
+Another
+
+```
+/employee
+```
+
+Another
+
+```
+/api/getEmployee
+```
+
+Within three months, the project becomes almost impossible to maintain.
+
+Large companies therefore spend time **before writing business logic** agreeing on standards.
+
+Sprint 0 is where those standards are established.
+
+The goal isn't to create features.
+
+The goal is to make future development smooth.
+
+---
+
+# Today's Roadmap
+
+We'll cover:
+
+1. What is Software Architecture?
+2. Monolith vs Modular Monolith vs Microservices
+3. Layered Architecture
+4. MVC Pattern
+5. Dependency Injection (DI)
+6. Inversion of Control (IoC)
+7. Spring Beans
+8. Feature-based Packaging
+9. Why HRMS should use this architecture
+
+These concepts are the foundation for everything you'll build later.
+
+---
+
+# Part 1 — What is Software Architecture?
+
+Suppose you're building a hospital.
+
+Before laying bricks, you need:
+
+* blueprint
+* room layout
+* plumbing
+* wiring
+* emergency exits
+
+Without a blueprint, construction becomes chaotic.
+
+Software is exactly the same.
+
+Architecture answers questions like:
+
+* Where should business logic live?
+* Where should database code go?
+* How should modules communicate?
+* How do we keep code maintainable?
+* How do we scale?
+
+Architecture is the **blueprint of software**.
+
+It describes:
+
+* project structure
+* responsibilities
+* communication
+* dependencies
+
+---
+
+## Bad Architecture
+
+Imagine this:
+
+```
+EmployeeController.java
+
+login()
+
+register()
+
+calculateSalary()
+
+saveEmployee()
+
+connectDatabase()
+
+sendEmail()
+
+generatePDF()
+
+deleteDepartment()
+
+approveLeave()
+
+everything...
+```
+
+One file contains everything.
+
+Eventually it grows to 5000 lines.
+
+Changing one thing breaks five others.
+
+This is called **spaghetti code**.
+
+---
+
+## Good Architecture
+
+Instead:
+
+```
+EmployeeController
+
+↓
+
+EmployeeService
+
+↓
+
+EmployeeRepository
+
+↓
+
+MySQL
+```
+
+Each layer has one responsibility.
+
+This makes code easier to understand, test, and change.
+
+---
+
+# Part 2 — Monolith
+
+A monolith is a single deployable application.
+
+Example:
+
+```
+Enterprise HRMS
+
+Employee
+
+Department
+
+Leave
+
+Payroll
+
+Attendance
+
+Authentication
+
+Notification
+
+Audit
+```
+
+All of these are packaged into **one application**.
+
+One JAR.
+
+One deployment.
+
+One database (often).
+
+Advantages:
+
+* Simple to develop
+* Easy to debug
+* Easy deployment
+* Easy local setup
+* Fast communication between modules
+
+Disadvantages:
+
+* Can become large if poorly structured
+* Entire application is redeployed for changes
+* Requires discipline as the codebase grows
+
+For our HRMS, a monolith is the right choice because it's a single business domain and we're focusing on solid design.
+
+---
+
+# Part 3 — Microservices
+
+Now imagine Amazon.
+
+They have:
+
+* Orders
+* Payments
+* Search
+* Inventory
+* Shipping
+* Recommendations
+
+Each becomes an independent application.
+
+```
+Payment Service
+
+↓
+
+Inventory Service
+
+↓
+
+Order Service
+
+↓
+
+Shipping Service
+```
+
+Each has its own:
+
+* database
+* deployment
+* team
+* API
+
+Advantages:
+
+* Independent deployments
+* Independent scaling
+* Fault isolation
+* Team autonomy
+
+Disadvantages:
+
+* Operational complexity
+* Network failures
+* Distributed transactions
+* Harder debugging
+* More infrastructure
+
+Microservices solve different problems than monoliths.
+
+---
+
+# Part 4 — Modular Monolith
+
+This is what we're building.
+
+A modular monolith combines the simplicity of a monolith with clear module boundaries.
+
+```
+Enterprise HRMS
+
+Employee Module
+
+Department Module
+
+Attendance Module
+
+Leave Module
+
+Payroll Module
+```
+
+Everything runs in one application, but each module is isolated by design.
+
+Example package structure:
+
+```
+employee
+    controller
+    service
+    repository
+    entity
+    dto
+
+department
+    controller
+    service
+    repository
+
+leave
+    controller
+    service
+```
+
+Each module owns its own code and shouldn't reach directly into another module's internals.
+
+---
+
+# Why Not Package by Layer?
+
+A traditional structure looks like this:
+
+```
+controller
+
+EmployeeController
+
+DepartmentController
+
+LeaveController
+
+AttendanceController
+
+service
+
+EmployeeService
+
+DepartmentService
+
+LeaveService
+
+AttendanceService
+
+repository
+
+EmployeeRepository
+
+DepartmentRepository
+```
+
+Problems:
+
+* Related files are scattered.
+* A single feature spans multiple folders.
+* Refactoring becomes harder as features grow.
+
+---
+
+# Feature-First Packaging
+
+Instead:
+
+```
+employee
+
+EmployeeController
+
+EmployeeService
+
+EmployeeRepository
+
+EmployeeEntity
+
+EmployeeMapper
+
+EmployeeDto
+```
+
+Everything for one feature stays together.
+
+Benefits:
+
+* Easier navigation
+* Better ownership
+* Better scalability
+* Cleaner modularization
+* Easier extraction into microservices if needed later
+
+---
+
+# Layered Architecture
+
+Our application will follow this flow:
+
+```
+Browser
+
+↓
+
+HTTP Request
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+```
+
+Each layer has a single responsibility.
+
+---
+
+## Controller
+
+Responsibilities:
+
+* Accept HTTP requests
+* Validate input
+* Call the service layer
+* Return HTTP responses
+
+It should **not** contain business rules.
+
+---
+
+## Service
+
+This is where business logic belongs.
+
+Examples:
+
+* Calculate salary
+* Approve leave
+* Validate business rules
+* Coordinate multiple repositories
+* Trigger notifications
+
+This is the "brain" of the application.
+
+---
+
+## Repository
+
+The repository is responsible only for data access.
+
+It:
+
+* saves entities
+* fetches records
+* updates data
+* deletes data
+
+No business logic should live here.
+
+---
+
+## Database
+
+Stores persistent data.
+
+Examples:
+
+* employees
+* departments
+* attendance
+* payroll
+* leave requests
+
+---
+
+# MVC Pattern
+
+MVC stands for:
+
+* Model
+* View
+* Controller
+
+In a REST API:
+
+* Model → Entities / DTOs
+* View → JSON responses
+* Controller → Handles HTTP requests
+
+The frontend (React, Angular, etc.) acts as the user interface instead of server-rendered HTML.
+
+---
+
+# Dependency Injection (DI)
+
+Imagine a `PayrollService` needs an `EmployeeRepository`.
+
+A poor approach is to create it directly:
+
+```java
+EmployeeRepository repository = new EmployeeRepository();
+```
+
+Now `PayrollService` is tightly coupled to that implementation.
+
+With DI, Spring creates the repository and supplies it:
+
+```java
+private final EmployeeRepository repository;
+
+public PayrollService(EmployeeRepository repository) {
+    this.repository = repository;
+}
+```
+
+Benefits:
+
+* Loose coupling
+* Easier testing
+* Clear dependencies
+* Better maintainability
+
+This is called **constructor injection**, which is the preferred approach in Spring.
+
+---
+
+# Inversion of Control (IoC)
+
+Without Spring:
+
+You create every object yourself.
+
+With Spring:
+
+Spring creates and manages objects for you.
+
+You declare what you need, and the framework provides it.
+
+That's the "inversion"—control of object creation moves from your code to the Spring container.
+
+---
+
+# Spring Beans
+
+A **Bean** is simply an object managed by the Spring IoC container.
+
+Examples:
+
+```
+EmployeeController
+
+EmployeeService
+
+EmployeeRepository
+```
+
+These are beans because Spring creates, configures, and wires them together.
+
+---
+
+# Putting It All Together
+
+When a client requests employee data:
+
+```
+Client
+
+↓
+
+HTTP Request
+
+↓
+
+EmployeeController
+
+↓
+
+EmployeeService
+
+↓
+
+EmployeeRepository
+
+↓
+
+MySQL
+
+↓
+
+EmployeeRepository
+
+↓
+
+EmployeeService
+
+↓
+
+EmployeeController
+
+↓
+
+JSON Response
+```
+
+This request-response flow is the backbone of almost every Spring Boot application.
+
+---
+
+# Why This Architecture Fits HRMS
+
+An HRMS has many independent business areas:
+
+* Employee Management
+* Departments
+* Attendance
+* Leave
+* Payroll
+* Notifications
+* Audit
+
+Each area can evolve independently, but they belong to the same overall application. A modular monolith with feature-based packaging keeps these domains organized without the added complexity of microservices.
+
+---
+
+# Today's Assignment
+
+Before writing any more code, make sure you can answer these questions in your own words:
+
+1. What is software architecture, and why is it important?
+2. What's the difference between a monolith, a modular monolith, and microservices?
+3. Why are we choosing a modular monolith for Enterprise HRMS?
+4. Explain the responsibilities of the Controller, Service, and Repository layers.
+5. What is the difference between Dependency Injection and Inversion of Control?
+6. What is a Spring Bean?
+7. Why is feature-based packaging more scalable than package-by-layer?
+8. Walk through the lifecycle of a request from the client to the database and back.
+
+---
+
+## Next Session
+
+Once you're comfortable with these concepts, we'll move to **Task 3 (Technology Decisions)** and create `docs/sprint-0/architecture-decisions.md`. You'll learn why each technology in the stack (Java 25, Spring Boot 4, Gradle, MySQL, Flyway, Spring Security, Swagger, Docker, etc.) was selected, what alternatives exist, and the trade-offs behind each choice. This will give you a strong rationale for every architectural decision before you write your first line of business logic.
+
+
+Excellent. I'm going to answer these the way I would if I were mentoring a junior backend engineer. These are also the kind of explanations expected in interviews—not textbook definitions.
+
+---
+
+# 1. What is Software Architecture, and why is it important?
+
+## Definition
+
+Software architecture is the **high-level blueprint of an application**. It defines how different parts of the system are organized, how they communicate, and the principles that guide development.
+
+Just as an architect designs a building before construction begins, software architecture defines the structure of a software system before business features are implemented.
+
+It answers questions like:
+
+* Where should business logic be written?
+* How should the application communicate with the database?
+* How should modules interact?
+* How should the project scale as it grows?
+* How can multiple developers work without conflicts?
+
+---
+
+## Real-world Example
+
+Imagine building a hospital.
+
+You cannot randomly place:
+
+* ICU
+* Reception
+* Pharmacy
+* Operation Theater
+
+You first create a blueprint.
+
+Software is exactly the same.
+
+Instead of rooms, we have:
+
+* Controllers
+* Services
+* Repositories
+* Database
+* Security
+* Configuration
+
+Architecture tells us where everything belongs.
+
+---
+
+## Why is Architecture Important?
+
+### 1. Maintainability
+
+If every developer writes code differently,
+
+the project becomes impossible to understand.
+
+Good architecture gives consistency.
+
+---
+
+### 2. Scalability
+
+Today HRMS has
+
+* Employees
+
+Tomorrow
+
+* Payroll
+
+Next month
+
+* Attendance
+
+Next year
+
+* Performance
+
+Architecture ensures adding new modules doesn't require rewriting old ones.
+
+---
+
+### 3. Team Collaboration
+
+Suppose 30 developers work on HRMS.
+
+Without architecture,
+
+everyone writes code differently.
+
+With architecture,
+
+everyone follows the same standards.
+
+---
+
+### 4. Testability
+
+A good architecture separates business logic from infrastructure.
+
+This makes unit testing much easier.
+
+---
+
+### 5. Flexibility
+
+Today you're using MySQL.
+
+Tomorrow the company wants PostgreSQL.
+
+If the architecture is clean,
+
+you only update the data access layer instead of rewriting business logic.
+
+---
+
+## Interview Answer
+
+> Software architecture is the high-level design of a software application. It defines the system's structure, components, communication, and design principles. Good architecture improves maintainability, scalability, readability, testing, and collaboration by ensuring each component has a clear responsibility.
+
+---
+
+# 2. What's the difference between Monolith, Modular Monolith, and Microservices?
+
+---
+
+## A. Monolith
+
+Everything exists inside one application.
+
+```
+HRMS
+
+Employee
+
+Department
+
+Leave
+
+Payroll
+
+Attendance
+```
+
+Single project
+
+Single deployment
+
+Single application
+
+---
+
+### Advantages
+
+Easy
+
+Simple
+
+Fast
+
+Good for startups
+
+Easy debugging
+
+---
+
+### Problems
+
+As the project grows,
+
+code becomes messy if not structured properly.
+
+---
+
+## B. Modular Monolith
+
+Still ONE application
+
+BUT
+
+internally divided into modules.
+
+```
+Employee Module
+
+Department Module
+
+Payroll Module
+
+Attendance Module
+
+Leave Module
+```
+
+Each module owns:
+
+* controller
+* service
+* repository
+* entity
+* dto
+
+Modules communicate through clearly defined interfaces instead of becoming tightly coupled.
+
+---
+
+Advantages
+
+* Clean organization
+* Easier maintenance
+* Easier testing
+* Easier future migration
+* Better ownership
+
+---
+
+## C. Microservices
+
+Each module becomes its own application.
+
+```
+Employee Service
+
+Department Service
+
+Payroll Service
+
+Attendance Service
+```
+
+Every service has
+
+its own
+
+* database
+* deployment
+* REST API
+
+Services communicate over the network (typically HTTP or messaging).
+
+---
+
+Advantages
+
+Independent scaling
+
+Independent deployment
+
+Independent teams
+
+Fault isolation
+
+---
+
+Disadvantages
+
+Very complex
+
+Distributed transactions
+
+Network failures
+
+More DevOps work
+
+Higher infrastructure cost
+
+---
+
+## Comparison
+
+| Feature       | Monolith     | Modular Monolith             | Microservices             |
+| ------------- | ------------ | ---------------------------- | ------------------------- |
+| Deployment    | One          | One                          | Many                      |
+| Database      | Usually one  | Usually one                  | Usually one per service   |
+| Complexity    | Low          | Medium                       | High                      |
+| Scalability   | Moderate     | Good                         | Excellent                 |
+| Team Size     | Small        | Small–Medium                 | Medium–Large              |
+| Communication | Method calls | Method calls between modules | Network calls             |
+| Best For      | Small apps   | Growing enterprise apps      | Large distributed systems |
+
+---
+
+## Interview Answer
+
+> A monolith is a single application where all features are packaged together. A modular monolith is still one application but organized into independent modules with clear boundaries, making it easier to maintain and evolve. Microservices split each business capability into independent deployable services that communicate over the network, offering greater scalability at the cost of additional operational complexity.
+
+---
+
+# 3. Why are we choosing a Modular Monolith for Enterprise HRMS?
+
+Because HRMS is **one business domain** with multiple related features.
+
+Examples
+
+Employee
+
+↓
+
+Department
+
+↓
+
+Attendance
+
+↓
+
+Payroll
+
+↓
+
+Leave
+
+These modules interact frequently and share data.
+
+Keeping them in one application simplifies development while still allowing clear separation of responsibilities.
+
+---
+
+### Why not a simple monolith?
+
+A plain monolith often becomes tightly coupled as it grows.
+
+Feature boundaries blur over time.
+
+---
+
+### Why not microservices?
+
+Microservices would introduce complexity we don't need yet:
+
+* API gateways
+* Service discovery
+* Network communication
+* Distributed transactions
+* Independent deployments
+* More infrastructure
+
+For a learning project and many real enterprise applications, that complexity isn't justified.
+
+---
+
+### Why Modular Monolith?
+
+It provides:
+
+* Clean organization
+* Easier debugging
+* Faster development
+* Lower operational overhead
+* Simple deployment
+* Easy transition to microservices later if business needs change
+
+---
+
+## Interview Answer
+
+> Enterprise HRMS consists of several related business modules that share the same domain and often the same database. A modular monolith gives us strong separation of concerns while keeping deployment and operations simple. It balances maintainability with lower complexity and can evolve into microservices in the future if required.
+
+---
+
+# 4. Explain the responsibilities of Controller, Service, and Repository.
+
+Think of ordering food.
+
+Customer
+
+↓
+
+Waiter
+
+↓
+
+Chef
+
+↓
+
+Kitchen
+
+---
+
+### Controller → Waiter
+
+Receives requests.
+
+Validates input.
+
+Calls service.
+
+Returns response.
+
+Should not contain business rules.
+
+---
+
+### Service → Chef
+
+Contains business logic.
+
+Examples:
+
+Approve Leave
+
+Calculate Salary
+
+Validate Rules
+
+Generate Payroll
+
+Coordinate multiple repositories
+
+---
+
+### Repository → Kitchen
+
+Interacts with the database.
+
+Examples:
+
+Save Employee
+
+Find Employee
+
+Delete Employee
+
+Update Employee
+
+No business logic belongs here.
+
+---
+
+## Request Flow
+
+```
+Client
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+```
+
+---
+
+## Interview Answer
+
+> The Controller handles HTTP requests and responses. The Service contains business logic and coordinates application workflows. The Repository is responsible for data access and interacts with the database. Separating these responsibilities keeps the application maintainable, testable, and easier to understand.
+
+---
+
+# 5. What is the difference between Dependency Injection (DI) and Inversion of Control (IoC)?
+
+These concepts are related but not the same.
+
+### Inversion of Control (IoC)
+
+IoC is the **principle**.
+
+Instead of your code creating and managing objects, a framework manages them for you.
+
+Without IoC:
+
+```java
+EmployeeService service = new EmployeeService();
+```
+
+With IoC:
+
+Spring creates `EmployeeService` and manages its lifecycle.
+
+---
+
+### Dependency Injection (DI)
+
+DI is a **technique used to implement IoC**.
+
+Instead of creating dependencies yourself, they are provided (injected) into your class.
+
+```java
+public EmployeeService(EmployeeRepository repository) {
+    this.repository = repository;
+}
+```
+
+Spring sees the constructor and injects the appropriate `EmployeeRepository` bean.
+
+---
+
+## Analogy
+
+Think of a restaurant.
+
+Without IoC:
+
+You cook your own food.
+
+With IoC:
+
+The restaurant manages the kitchen.
+
+DI is the waiter bringing your meal to the table—you don't prepare it yourself.
+
+---
+
+## Interview Answer
+
+> Inversion of Control is the design principle where object creation and lifecycle are managed by the framework instead of the application code. Dependency Injection is the mechanism Spring uses to implement IoC by supplying required dependencies to a class, typically through constructor injection.
+
+---
+
+# 6. What is a Spring Bean?
+
+A Spring Bean is **any object that is created, configured, and managed by the Spring IoC container**.
+
+Examples include:
+
+* `@Controller`
+* `@Service`
+* `@Repository`
+* `@Component`
+* Beans declared with `@Bean` inside `@Configuration` classes
+
+Because Spring manages these objects, it can inject them into other beans, manage their lifecycle, and apply features like transactions or security proxies.
+
+---
+
+## Interview Answer
+
+> A Spring Bean is an object managed by the Spring IoC container. Spring creates it, manages its lifecycle, and injects it where needed. Components such as controllers, services, and repositories are typically Spring Beans.
+
+---
+
+# 7. Why is feature-based packaging more scalable than package-by-layer?
+
+### Package-by-layer
+
+```
+controller/
+service/
+repository/
+entity/
+```
+
+As the application grows, files for one feature are scattered across many folders.
+
+To work on "Employee", you constantly jump between directories.
+
+---
+
+### Feature-based packaging
+
+```
+employee/
+    controller/
+    service/
+    repository/
+    entity/
+    dto/
+
+department/
+    controller/
+    service/
+    repository/
+```
+
+Everything related to a feature stays together.
+
+Benefits:
+
+* Easier navigation
+* Better modularity
+* Clear ownership
+* Reduced coupling
+* Easier extraction into microservices later
+
+---
+
+## Interview Answer
+
+> Feature-based packaging groups all classes related to a business capability together, improving modularity, readability, and maintainability. As the project grows, teams can work on individual features with fewer conflicts, making it more scalable than organizing code purely by technical layers.
+
+---
+
+# 8. Walk through the lifecycle of a request from the client to the database and back.
+
+Suppose the client requests:
+
+```
+GET /api/v1/employees/101
+```
+
+### Step 1: Client
+
+A frontend or Postman sends an HTTP request.
+
+⬇
+
+### Step 2: Spring Dispatcher
+
+Spring's dispatcher receives the request and routes it to the correct controller based on the URL and HTTP method.
+
+⬇
+
+### Step 3: Controller
+
+The controller validates inputs and delegates the work.
+
+```java
+employeeService.getEmployee(101);
+```
+
+⬇
+
+### Step 4: Service
+
+The service applies business rules and coordinates the operation.
+
+```java
+employeeRepository.findById(101);
+```
+
+⬇
+
+### Step 5: Repository
+
+The repository uses Spring Data JPA/Hibernate to execute the database query.
+
+⬇
+
+### Step 6: Database
+
+MySQL returns the employee record.
+
+⬇
+
+### Step 7: Repository
+
+Maps the database row into an entity and returns it.
+
+⬇
+
+### Step 8: Service
+
+May convert the entity into a DTO, apply additional logic, or combine data from multiple sources.
+
+⬇
+
+### Step 9: Controller
+
+Wraps the result in an HTTP response.
+
+⬇
+
+### Step 10: Spring
+
+Serializes the Java object into JSON.
+
+⬇
+
+### Step 11: Client
+
+Receives:
+
+```json
+{
+  "employeeId": 101,
+  "firstName": "John",
+  "lastName": "Doe"
+}
+```
+
+---
+
+## Complete Flow
+
+```text
+Client (Browser/Postman)
+        │
+        ▼
+HTTP Request
+        │
+        ▼
+Spring DispatcherServlet
+        │
+        ▼
+EmployeeController
+        │
+        ▼
+EmployeeService
+        │
+        ▼
+EmployeeRepository
+        │
+        ▼
+Hibernate / JPA
+        │
+        ▼
+MySQL Database
+        │
+        ▲
+   Query Result
+        │
+        ▲
+EmployeeRepository
+        │
+        ▲
+EmployeeService
+        │
+        ▲
+EmployeeController
+        │
+        ▲
+HTTP Response (JSON)
+        │
+        ▲
+Client
+```
+
+If you understand these eight topics well, you've grasped the architectural foundation that almost every enterprise Spring Boot application is built on. In the next lesson, we'll use this understanding to justify every technology choice in your HRMS stack rather than treating dependencies as items to add blindly.
+
+Sprint 0 is complete when:
+
+✅ Project runs successfully.
+✅ MySQL is connected.
+✅ Flyway is configured.
+✅ Swagger UI is accessible.
+✅ Gradle build passes.
+✅ Project structure follows our standards.
+✅ Documentation is updated.
+✅ Code is committed and pushed to GitHub.
+✅ You understand why every technology and design decision was made—not just how to use it.

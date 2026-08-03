@@ -1,0 +1,128 @@
+📍 Where We Are in the SDLC
+✅ Requirement Gathering
+        ↓
+✅ Project Planning
+        ↓
+✅ Architecture Decisions
+        ↓
+✅ Technology Stack Selection
+        ↓
+🔜 Project Initialization (Spring Boot)
+        ↓
+Database Setup
+        ↓
+Authentication
+        ↓
+Business Modules
+🚀 Sprint 0.1 — Spring Boot Project Initialization
+
+This is the first coding sprint, but we're still laying the foundation.
+
+Goal
+
+By the end of this sprint, you'll have:
+
+✅ Spring Boot project created
+✅ Imported into IntelliJ
+✅ Gradle configured
+✅ Project structure created
+✅ Application running
+✅ MySQL connected
+✅ Swagger working
+✅ First commit pushed
+📋 Today's Tasks
+Task 1 — Generate Spring Boot Project
+
+We'll use Spring Initializr, but instead of blindly filling fields, we'll understand every option.
+
+We'll decide:
+
+Project
+Gradle
+
+Why?
+
+Faster incremental builds
+Modern Spring ecosystem
+You've already worked with Gradle
+Language
+Java
+Spring Boot
+4.x
+
+We'll use the latest stable 4.x version available in Initializr.
+
+Project Metadata
+Field	Value
+Group	com.gitanjali
+Artifact	enterprise-hrms
+Name	Enterprise HRMS
+Description	Enterprise Human Resource Management System
+Package	com.gitanjali.hrms
+Packaging	Jar
+Java	25
+Task 2 — Dependencies
+
+Don't add everything.
+
+We'll add only the dependencies required to bootstrap the project.
+
+Required
+Spring Web
+Spring Data JPA
+MySQL Driver
+Validation
+Lombok
+Spring Security
+Flyway Migration
+Spring Boot DevTools
+Spring Boot Actuator
+We'll add later
+MapStruct
+Testing libraries (beyond defaults)
+Mail
+Cache
+Redis
+Kafka
+JWT libraries (if needed)
+
+This keeps the project lean.
+
+Task 3 — Download & Import
+
+Extract it into:
+
+Enterprise-HRMS/
+└── backend/
+
+Open the backend folder as a Gradle project in IntelliJ.
+
+Let Gradle finish downloading dependencies before making changes.
+
+Task 4 — Verify
+
+Run the generated application without changing any code.
+
+We want to confirm:
+
+Java 25 toolchain works
+Gradle builds successfully
+Spring Boot starts successfully
+
+If anything fails, we fix it before proceeding.
+
+🎓 Concepts We'll Learn During This Step
+
+Before we start modifying files, I'll explain:
+
+What group means
+What artifact means
+Why the package name matters
+How Gradle organizes a project
+What src/main/java vs src/main/resources is for
+Why application.yml is preferred over application.properties
+What the Spring Boot launcher class actually does
+
+You'll understand the project structure instead of memorizing it.
+
+'ll review it together before writing our first line of project-specific code.
