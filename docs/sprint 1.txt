@@ -1,0 +1,47 @@
+# Sprint 1 - Project Foundation
+
+## Goal
+Establish a scalable modular monolith architecture for the Enterprise HRMS.
+
+## Completed
+- Java 25 configured
+- Spring Boot project initialized
+- MySQL connected
+- Flyway configured
+- Application bootstrapped
+- Modular package structure created
+
+## Learning
+- Difference between layered architecture and modular monolith
+- Why feature-based packaging scales better
+
+## API Response Standard
+
+Created a generic `ApiResponse<T>` class to ensure all REST APIs return a consistent response structure.
+
+### Fields
+- success
+- message
+- data
+- timestamp
+
+### Why?
+- Consistent API contract
+- Easier frontend integration
+- Simpler testing
+- Standardized error handling
+
+## Global Exception Handling
+
+Implemented centralized exception handling using `@RestControllerAdvice`.
+
+### Benefits
+
+- No repetitive try/catch blocks
+- Standard error response format
+- Easier maintenance
+- Better security (no stack traces exposed to clients)
+
+### First Custom Exception
+
+- ResourceNotFoundException
