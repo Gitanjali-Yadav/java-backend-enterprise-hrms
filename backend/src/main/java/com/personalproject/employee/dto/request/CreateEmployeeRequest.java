@@ -29,9 +29,10 @@ public class CreateEmployeeRequest {
     @NotBlank(message="Phone Number is required")
     private String phoneNumber;
 
+    @NotNull(message="Date of Birth is required")
     private LocalDate dateOfBirth;
 
-    @NotBlank(message="Date of Joining is required")
+    @NotNull(message="Date of Joining is required")
     private LocalDate dateOfJoining;
 
     @NotBlank(message="Designation is required")

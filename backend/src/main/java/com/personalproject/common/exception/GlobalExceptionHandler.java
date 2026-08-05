@@ -28,6 +28,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<Object>> handleResourceAlreadyExists(
+            ResourceAlreadyExistsException ex ) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ApiResponse<>(
+                        false,
+                        ex.getMessage(),
+                        null
+                ));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<ValidationErrorResponse>> handleValidationException(
             MethodArgumentNotValidException ex
